@@ -1,10 +1,10 @@
 <script>
-  import { onDestroy, onMount, createEventDispatcher } from 'svelte';
+  import { onDestroy, onMount } from 'svelte';
 
   export let src = '';
   export let ready = false;
   export let minimized = false;
-  export let timeout = 5000;
+  export let timeout = 10000;
   export let onLoad = () => undefined;
   export let onError = () => undefined;
 

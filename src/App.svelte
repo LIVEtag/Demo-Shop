@@ -173,8 +173,17 @@
         <div class="livetag__overlay"></div>
 
         <div class="livetag__btns">
-          <button class="livetag__btn livetag__btn-restore" on:click={restore}>Restore</button>
-          <button class="livetag__btn livetag__btn-close" on:click={close}>Close</button>
+          <button title="Maximize" class="livetag__btn livetag__btn-restore" on:click={restore}>
+            <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" fit="" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" focusable="false">
+              <path d="M22.5 12.273l-7.5 7.5M7.5 12.273l7.5 7.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </button>
+          <button title="Close" class="livetag__btn livetag__btn-close" on:click={close}>
+            <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14" fit="" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" focusable="false">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M13.03.97a.75.75 0 010 1.06l-11 11a.75.75 0 01-1.06-1.06l11-11a.75.75 0 011.06 0z" fill="#fff"></path>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M.97.97a.75.75 0 011.06 0l11 11a.75.75 0 11-1.06 1.06l-11-11a.75.75 0 010-1.06z" fill="#fff"></path>
+            </svg>
+          </button>
         </div>
       {/if}
     </div>
@@ -190,7 +199,29 @@
 
   .livetag__btns {
     position: absolute;
-    top: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .livetag__btn {
+    border: none;
+    background-color: rgba(0, 0, 0, 0.35);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 32px;
+    line-height: 32px;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .livetag__btn-close svg {
+    width: 16px;
   }
 
   .livetag__error {
@@ -232,5 +263,6 @@
     bottom: 0;
     right: 0;
     left: 0;
+    cursor: move;
   }
 </style>
