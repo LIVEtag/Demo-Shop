@@ -1,7 +1,6 @@
 import svelte from 'rollup-plugin-svelte';
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
-import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import postcss from 'rollup-plugin-postcss';
 import replace from '@rollup/plugin-replace';
@@ -15,8 +14,9 @@ const production = process.env.NODE_ENV === 'production';
 const envVars = {
   '__DEV__': JSON.stringify(production),
   'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+  'process.env.APP_JS_SDK_URL': JSON.stringify(process.env.APP_JS_SDK_URL),
   'process.env.APP_WIDGET_SHOP_URI': JSON.stringify(process.env.APP_WIDGET_SHOP_URI),
-  'process.env.APP_WIDGET_ORIGIN': JSON.stringify(process.env.APP_WIDGET_ORIGIN),
+  'process.env.APP_WIDGET_URL': JSON.stringify(process.env.APP_WIDGET_URL),
 };
 
 function serve() {
@@ -50,7 +50,7 @@ export default {
     sourcemap: !production,
     format: 'umd',
     name: 'Livetag',
-    file: 'public/build/bundle.js',
+    file: 'public/build/main.js',
   },
   plugins: [
     replace({ ...envVars }),
@@ -82,10 +82,6 @@ export default {
     // In dev mode, call `npm run start` once
     // the bundle has been generated
     !production && serve(),
-
-    // Watch the `public` directory and refresh the
-    // browser on changes when not in production
-    !production && livereload('public'),
 
     // If we're building for production (npm run build
     // instead of npm run dev), minify

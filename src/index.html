@@ -38,8 +38,8 @@
   <div>
     <button type="button" data-livetag="">Watch Now</button>
     <button type="button" data-livetag="" data-livetag-minimized>Watch Now (minimized)</button>
+    
     <button id="watch-session" type="button" data-livetag="">Watch Session</button>
-
     <input type="text" name="sessionId" placeholder="Session Id"/>
   </div>
 </div>
@@ -52,23 +52,26 @@
 
     l.LivetagConfig = {
       project: e,
-      widgetOrigin: t,
+      widgetUrl: t,
       autoInit: true,
     };
 
-    // var s = i.createElement(v);
-    // s.async = !0;
-    // s.src = './build/bundle.js';
-    // i.body.appendChild(s);
-  })(window, document, 'script', process.env.APP_WIDGET_SHOP_URI, process.env.APP_WIDGET_ORIGIN);
+    var s = i.createElement(v);
+    s.async = !0;
+    s.src = process.env.APP_JS_SDK_URL;
+    i.body.appendChild(s);
+  })(window, document, 'script', process.env.APP_WIDGET_SHOP_URI, process.env.APP_WIDGET_URL);
 </script>
 
 <script>
   (function () {
-    var btn = document.querySelector('#watch-session');
-
-    document.querySelector('[name="sessionId"]').addEventListener('change', function (e) {
-      btn.setAttribute('data-livetag', e.target.value);
+    document.querySelector('#watch-session').addEventListener('click', () => {
+      var sessionId = document.querySelector('[name="sessionId"]').value;
+      if (!sessionId) {
+        return;
+      }
+      
+      window.Livetag.open(sessionId);
     });
   })();
 </script>
