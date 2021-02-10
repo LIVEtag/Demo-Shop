@@ -16,7 +16,6 @@ const envVars = {
   'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
   'process.env.APP_JS_SDK_URL': JSON.stringify(process.env.APP_JS_SDK_URL),
   'process.env.APP_WIDGET_SHOP_URI': JSON.stringify(process.env.APP_WIDGET_SHOP_URI),
-  'process.env.APP_WIDGET_URL': JSON.stringify(process.env.APP_WIDGET_URL),
 };
 
 function serve() {
@@ -50,7 +49,7 @@ export default {
     sourcemap: !production,
     format: 'umd',
     name: 'Livetag',
-    file: 'public/build/main.js',
+    file: 'public/main.js',
   },
   plugins: [
     replace({ ...envVars }),

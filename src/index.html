@@ -9,25 +9,25 @@
   <base href="/"/>
 
   <style>
-    html {
-      font-size: 1em;
-      font-family: sans-serif;
-    }
+      html {
+          font-size: 1em;
+          font-family: sans-serif;
+      }
 
-    body {
-      padding: 0;
-      margin: 0;
-    }
+      body {
+          padding: 0;
+          margin: 0;
+      }
 
-    h1 {
-      margin: 0;
-    }
+      h1 {
+          margin: 0;
+      }
 
-    .grid {
-      grid-template-columns: 1fr 1fr;
-      display: grid;
-      grid-gap: 1em;
-    }
+      .grid {
+          grid-template-columns: 1fr 1fr;
+          display: grid;
+          grid-gap: 1em;
+      }
   </style>
 </head>
 
@@ -38,21 +38,20 @@
   <div>
     <button type="button" data-livetag="">Watch Now</button>
     <button type="button" data-livetag="" data-livetag-minimized>Watch Now (minimized)</button>
-    
+
     <button id="watch-session" type="button" data-livetag="">Watch Session</button>
     <input type="text" name="sessionId" placeholder="Session Id"/>
   </div>
 </div>
 
-<script>
+<script type="application/javascript">
   (function (l, i, v, e, t, a, g) {
     if ('Livetag' in l) {
       return;
     }
 
     l.LivetagConfig = {
-      project: e,
-      widgetUrl: t,
+      projectId: e,
       autoInit: true,
     };
 
@@ -60,17 +59,17 @@
     s.async = !0;
     s.src = process.env.APP_JS_SDK_URL;
     i.body.appendChild(s);
-  })(window, document, 'script', process.env.APP_WIDGET_SHOP_URI, process.env.APP_WIDGET_URL);
+  })(window, document, 'script', process.env.APP_WIDGET_SHOP_URI);
 </script>
 
-<script>
+<script type="application/javascript">
   (function () {
     document.querySelector('#watch-session').addEventListener('click', () => {
       var sessionId = document.querySelector('[name="sessionId"]').value;
       if (!sessionId) {
         return;
       }
-      
+
       window.Livetag.open(sessionId);
     });
   })();
