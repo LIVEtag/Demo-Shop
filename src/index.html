@@ -55,7 +55,7 @@
     //
     // ES Modules
     //
-    // import('../dist/livetag.esm.js').then((Livetag) => {
+    // import(process.env.APP_JS_SDK_URL).then((Livetag) => {
     //   // Use Livetag methods
     //   console.log('[Livetag]', Livetag);
     //
@@ -69,7 +69,7 @@
 
     a = i.createElement(v);
     a.async = !0;
-    a.src = '../dist/livetag.js';
+    a.src = process.env.APP_JS_SDK_URL;
     g = i.getElementsByTagName('script')[0];
     g.parentNode.insertBefore(a, g);
   })(window, document, 'script');
