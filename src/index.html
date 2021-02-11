@@ -44,25 +44,38 @@
   </div>
 </div>
 
-<script type="application/javascript">
+<script>
   (function (l, i, v, e, t, a, g) {
-    if ('Livetag' in l) {
-      return;
-    }
+    l.initLivetag = l.initLivetag || function () {
+      (l.initLivetag.q = l.initLivetag.q || []).push(arguments);
 
-    l.LivetagConfig = {
-      projectId: e,
-      autoInit: true,
+      return l.initLivetag;
     };
 
-    var s = i.createElement(v);
-    s.async = !0;
-    s.src = process.env.APP_JS_SDK_URL;
-    i.body.appendChild(s);
-  })(window, document, 'script', process.env.APP_WIDGET_SHOP_URI);
+    //
+    // ES Modules
+    //
+    // import('../dist/livetag.esm.js').then((Livetag) => {
+    //   // Use Livetag methods
+    //   console.log('[Livetag]', Livetag);
+    //
+    //   Livetag.init({ projectId: 'shop1' });
+    // });
+
+    initLivetag({ projectId: process.env.APP_WIDGET_SHOP_URI });
+    initLivetag(function (livetag) {
+      console.log('[Livetag]', livetag);
+    });
+
+    a = i.createElement(v);
+    a.async = !0;
+    a.src = '../dist/livetag.js';
+    g = i.getElementsByTagName('script')[0];
+    g.parentNode.insertBefore(a, g);
+  })(window, document, 'script');
 </script>
 
-<script type="application/javascript">
+<script>
   (function () {
     document.querySelector('#watch-session').addEventListener('click', () => {
       var sessionId = document.querySelector('[name="sessionId"]').value;
