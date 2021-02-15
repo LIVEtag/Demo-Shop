@@ -9,39 +9,51 @@
   <base href="/"/>
 
   <style>
-      html {
-          font-size: 1em;
-          font-family: sans-serif;
-      }
+    html {
+      font-size: 1em;
+      font-family: sans-serif;
+    }
 
-      body {
-          padding: 0;
-          margin: 0;
-      }
+    body {
+      padding: 1em;
+      margin: 0;
+    }
 
-      h1 {
-          margin: 0;
-      }
+    h1 {
+      margin: 0;
+      color: #6b6191;
+    }
 
-      .grid {
-          grid-template-columns: 1fr 1fr;
-          display: grid;
-          grid-gap: 1em;
-      }
+    .grid {
+      grid-template-columns: 1fr 1fr;
+      display: grid;
+      grid-gap: 1em;
+    }
+
+    .btn {
+      border: 1px solid;
+      background-color: #fff;
+      cursor: pointer;
+      padding: 0.2em 0.5em;
+      border-radius: 3px;
+      color: #6b6191;
+    }
   </style>
 </head>
 
 <body>
-<h1>LiveTag Demo Shop</h1>
-
 <div class="grid">
   <div>
+    <h1>LiveTag Demo Shop</h1>
+
     <button type="button" data-livetag="">Watch Now</button>
     <button type="button" data-livetag="" data-livetag-minimized>Watch Now (minimized)</button>
 
     <button id="watch-session" type="button" data-livetag="">Watch Session</button>
     <input type="text" name="sessionId" placeholder="Session Id"/>
   </div>
+
+  <div id="app"></div>
 </div>
 
 <script>

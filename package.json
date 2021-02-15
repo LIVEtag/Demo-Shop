@@ -6,7 +6,7 @@
     "build": "NODE_ENV=production rollup -c",
     "dist": "npm run build",
     "dev": "rollup -c -w",
-    "start": "sirv public"
+    "start": "sirv public --port 8000"
   },
   "keywords": [],
   "author": "Brezhnev Ivan <brezhnev.ia@gbksoft.com>",
