@@ -47,9 +47,8 @@ export default {
   input: 'src/main.js',
   output: {
     sourcemap: !production,
-    format: 'umd',
-    name: 'Livetag',
-    file: 'public/main.js',
+    format: 'iife',
+    file: 'public/build/main.js',
   },
   plugins: [
     replace({ ...envVars }),

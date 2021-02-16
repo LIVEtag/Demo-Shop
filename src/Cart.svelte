@@ -24,12 +24,6 @@
     line-height: 1.3em;
   }
 
-  .cart__title {
-    margin-top: 0;
-    margin-bottom: 1em;
-    color: #6b6191;
-  }
-
   .cart__checkout {
     margin-top: 1em;
   }
@@ -52,27 +46,21 @@
   }
 
   .cart__subtotal {
-    font-size: 1em;
+    font-size: 1.1em;
   }
 
   .cart__checkout .btn {
-    font-size: 1em;
+    font-size: 1.2em;
     border: 1px solid;
     background-color: #fff;
     color: #6b6191;
     border-radius: 3px;
     padding: 0.5em 1em;
-    transition: box-shadow 0.2s ease;
-  }
-
-  .cart__checkout .btn:hover {
-    box-shadow: 0 0 6px;
-    transition: box-shadow 0.2s ease;
   }
 </style>
 
 <div class="cart">
-  <h2 class="cart__title">Shopping Cart</h2>
+  <h2 class="component__title">Shopping Cart</h2>
 
   <div class="products">
     {#if products && products.length > 0}
@@ -96,7 +84,7 @@
         <button class="btn" type="button" on:click={handleCheckout}>Proceed to checkout</button>
       </div>
     {:else}
-      No products in cart.
+      Your Cart is empty
     {/if}
   </div>
 </div>
