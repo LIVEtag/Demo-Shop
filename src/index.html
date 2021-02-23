@@ -157,7 +157,9 @@
     //   Livetag.init({ projectId: 'shop1' });
     // });
 
-    initLivetag({ projectId: process.env.APP_WIDGET_SHOP_URI });
+    let [projectId] = location.pathname.replace(/^\/+/, '').split('/');
+
+    initLivetag({ projectId: projectId || process.env.APP_WIDGET_SHOP_URI });
     initLivetag(function (livetag) {
       console.log('[Livetag]', livetag);
     });

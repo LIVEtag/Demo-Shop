@@ -32,7 +32,7 @@
 <div class="product">
   <div class="product__photo">
     <div>
-      <img src="{product.photo}" alt="Product photo"/>
+      <img src="{product.photo}" alt="{product.title}"/>
     </div>
 
     <div class="product__delete">
