@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "NODE_ENV=production rollup -c",
+    "build": "cross-env NODE_ENV=production rollup -c",
     "dist": "npm run build",
     "dev": "rollup -c -w",
     "start": "sirv public --port 8000 --single"
@@ -16,6 +16,7 @@
     "@rollup/plugin-html": "^0.2.2",
     "@rollup/plugin-node-resolve": "^11.0.0",
     "@rollup/plugin-replace": "^2.3.4",
+    "cross-env": "^7.0.3",
     "dotenv": "^8.2.0",
     "postcss": "^8.2.4",
     "rollup": "^2.3.4",
