@@ -154,12 +154,12 @@
     //   // Use Livetag methods
     //   console.log('[Livetag]', Livetag);
     //
-    //   Livetag.init({ projectId: 'shop1' });
+    //   Livetag.init({ shopUri: 'shop1' });
     // });
 
-    let [projectId] = location.pathname.replace(/^\/+/, '').split('/');
+    let [shopUri] = location.pathname.replace(/^\/+/, '').split('/');
 
-    initLivetag({ projectId: projectId || process.env.APP_WIDGET_SHOP_URI });
+    initLivetag({ shopUri: shopUri || process.env.APP_WIDGET_SHOP_URI });
     initLivetag(function (livetag) {
       console.log('[Livetag]', livetag);
     });
