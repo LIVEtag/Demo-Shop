@@ -2,45 +2,32 @@
   import { onMount } from 'svelte';
   import Cart from './Cart.svelte';
 
-  let products = [
-    /*{
-      sku: '265d2ee1-16f5-3a93-b953-ed661e448866',
-      title: 'Quidem cupiditate.',
-      photo: 'https://picsum.photos/seed/35/200',
-      link: 'http://mclaughlin.com/quos-reprehenderit-beatae-eligendi-qui-aut-est-ut',
-      option: { size: 'M', color: 'BlueViolet', price: 130.36 },
-      quantity: 2,
-    },
-    {
-      sku: '265d2ee1-16f5-3a93-b953-ed661e448866',
-      title: 'Quidem cupiditate.',
-      photo: 'https://picsum.photos/seed/35/200',
-      link: 'http://mclaughlin.com/quos-reprehenderit-beatae-eligendi-qui-aut-est-ut',
-      option: { size: 'M', color: 'BlueViolet', price: 130.36 },
-      quantity: 1,
-    },
-    {
-      sku: '265d2ee1-16f5-3a93-b953-ed661e448866',
-      title: 'Quidem cupiditate.',
-      photo: 'https://picsum.photos/seed/35/200',
-      link: 'http://mclaughlin.com/quos-reprehenderit-beatae-eligendi-qui-aut-est-ut',
-      option: { size: 'M', color: 'BlueViolet', price: 130.36 },
-      quantity: 1,
-    },*/
-  ];
+  let livetag;
+
+  let sessionId = null;
+  let minimized = false;
+
+  let products = [];
 
   onMount(() => {
     let unsubscribe;
-    initLivetag(function (livetag) {
-      unsubscribe = livetag.onAddToCart(handleAddToCart);
+    initLivetag(function (_livetag) {
+      livetag = _livetag;
+      unsubscribe = _livetag.onAddToCart(handleAddToCart);
     });
 
     return () => {
+      livetag = undefined;
+
       if (unsubscribe) {
         unsubscribe();
       }
     };
   });
+
+  function watchSession() {
+    livetag.open(sessionId, { minimized });
+  }
 
   function handleAddToCart(product) {
     products = [...products, { ...product, quantity: product.quantity || 1 }];
@@ -59,6 +46,39 @@
   }
 </script>
 
-<div class="app">
-  <Cart {products} on:delete={handleDelete} on:changeQuantity={handleChangeQuantity} on:checkout={handleCheckout}/>
+<div class="grid">
+  <div class="component dream-shadow">
+    <h2 class="component__title">DEMO Livestream</h2>
+
+    <div class="btn__group">
+      <button class="btn" type="button" data-livetag="">Watch Now</button>
+    </div>
+
+    <div class="btn__group">
+      <button class="btn" type="button" data-livetag="" data-livetag-minimized>Watch Now (minimized)</button>
+    </div>
+
+    <div class="btn__group">
+      <button class="btn" type="button" data-livetag="3">Watch Session 3</button>
+    </div>
+
+    <fieldset>
+      <legend>Watch specific session</legend>
+
+      <div class="btn__group">
+        <button class="btn" type="button" on:click={watchSession}>Watch</button>
+        <input class="input" type="text" bind:value={sessionId} placeholder="Session Id"/>
+      </div>
+
+      <div class="btn__group">
+        <label><input class="input" type="checkbox" bind:checked={minimized}/> Minimized</label>
+      </div>
+    </fieldset>
+  </div>
+
+  <div class="component dream-shadow">
+    <div class="app">
+      <Cart {products} on:delete={handleDelete} on:changeQuantity={handleChangeQuantity} on:checkout={handleCheckout}/>
+    </div>
+  </div>
 </div>
