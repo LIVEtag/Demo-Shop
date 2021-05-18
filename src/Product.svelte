@@ -43,20 +43,22 @@
 
   <div class="product__info">
     <div class="product__title">
-      <a class="product__link" href="{product.link}">{product.title}</a>
+      <a class="product__link" href="{product.link}" target="_blank" rel="noopener">{product.title}</a>
     </div>
-
-    <div class="product__sku">SKU: {product.option.sku}</div>
 
     <div class="product__price">
-      Price: ${product.option.price}
+      <b>Price</b>: ${product.option.price}
     </div>
 
-    <div class="product__option">{option}</div>
+    <div class="product__sku"><b>SKU</b>: {product.option.sku}</div>
+
+    <div class="product__option">
+      <b>Option</b>: {option}
+    </div>
 
     <div class="product__qty">
       <label>
-        Qty: <input type="number" bind:value={product.quantity} min="1" max="100" step="1" on:change={onChangeQty}/>
+        <b>Qty</b>: <input type="number" bind:value={product.quantity} min="1" max="100" step="1" on:change={onChangeQty}/>
       </label>
     </div>
   </div>
@@ -84,10 +86,19 @@
     flex: 1;
   }
 
+  .product__qty {
+    margin-top: 1em;
+  }
+
   .product__title {
-    font-size: 1.1em;
+    font-size: 1.3em;
     font-weight: bold;
     margin-bottom: 0.4em;
+  }
+
+  .product__price {
+    margin: 1em 0;
+    font-size: 1.2em;
   }
 
   .product__link {
