@@ -2,13 +2,14 @@
   import { createEventDispatcher } from 'svelte';
 
   const dispatch = createEventDispatcher();
-  const extractOption = ({ price, ...options } = {}) => options;
+  const extractOption = ({ price, uuid, sku, ...options } = {}) => options;
 
   export let product = {
-    sku: '',
+    externalId: '',
     photo: '',
     link: '',
     option: {
+      sku: '',
       price: 0,
     },
     quantity: 0
@@ -45,7 +46,7 @@
       <a class="product__link" href="{product.link}">{product.title}</a>
     </div>
 
-    <div class="product__sku">SKU: {product.sku}</div>
+    <div class="product__sku">SKU: {product.option.sku}</div>
 
     <div class="product__price">
       Price: ${product.option.price}

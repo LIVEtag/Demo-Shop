@@ -10,18 +10,18 @@
   let products = [];
 
   onMount(() => {
-    let unsubscribe;
-    initLivetag(function (_livetag) {
-      livetag = _livetag;
-      unsubscribe = _livetag.onAddToCart(handleAddToCart);
+    let subscriptions = [];
+    initLivetag(function (Livetag) {
+      livetag = Livetag;
+      subscriptions.push(Livetag.onAddToCart(handleAddToCart));
+      subscriptions.push(Livetag.onCheckout(handleCheckout));
     });
 
     return () => {
-      livetag = undefined;
+      livetag = null;
 
-      if (unsubscribe) {
-        unsubscribe();
-      }
+      subscriptions.forEach((s) => s());
+      subscriptions = null;
     };
   });
 
@@ -29,8 +29,18 @@
     livetag.open(sessionId, { minimized });
   }
 
-  function handleAddToCart(product) {
-    products = [...products, { ...product, quantity: product.quantity || 1 }];
+  function handleAddToCart(_product) {
+    const product = products.find((p) => p.option.sku === _product.option.sku);
+
+    if (product) {
+      products = products
+        .map((p) => p === product ? ({
+          ...product,
+          quantity: Number(product.quantity) + Number(_product.quantity),
+        }) : p);
+    } else {
+      products = products.concat(_product);
+    }
   }
 
   function handleDelete({ detail: product }) {
@@ -41,8 +51,25 @@
     products = products.map(p => p === product ? ({ ...product }) : p);
   }
 
-  function handleCheckout() {
-    console.log('[Cart] Checkout', products.map(({ sku }) => sku));
+  function handleCheckout(_products) {
+    const skuMap = Object.fromEntries(products.map(p => [p.option.sku, p]));
+    const newProducts = _products.filter(p => !skuMap[p.option.sku]);
+    const existingProductsSku = Object.fromEntries(
+      _products
+        .filter(p => skuMap[p.option.sku])
+        .map(p => [p.option.sku, p.quantity]),
+    );
+
+    products = products.map(product => ({
+      ...product,
+      quantity: product.quantity + (existingProductsSku[product.option.sku] || 0),
+    })).concat(newProducts);
+  }
+
+  function handleCartCheckout() {
+    products = [];
+
+    alert('Thanks for the shopping!');
   }
 </script>
 
@@ -78,7 +105,7 @@
 
   <div class="component dream-shadow">
     <div class="app">
-      <Cart {products} on:delete={handleDelete} on:changeQuantity={handleChangeQuantity} on:checkout={handleCheckout}/>
+      <Cart {products} on:delete={handleDelete} on:changeQuantity={handleChangeQuantity} on:checkout={handleCartCheckout}/>
     </div>
   </div>
 </div>
